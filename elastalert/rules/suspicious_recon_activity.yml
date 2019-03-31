@@ -1,0 +1,30 @@
+name: "Suspicious Reconnaissance Activity"
+import: reg_config.txt
+description: "Detects suspicious command line activity on Windows systems"
+index: logs-endpoint-winevent-sysmon-*
+filter:
+- query:
+   query_string:
+           query: '(process_command_line:("net group \"domain admins\" \/domain" "net localgroup administrators") AND event_id:"1") OR (process_command_line:("whoami") AND event_id:"1") OR (process_name:("whoami.exe") AND event_id:"1")'
+realert:
+   minutes: 1
+
+query_key: ['host_name', 'event_id', 'process_command_line', 'user_name', 'host_name', 'process_current_directory', 'mitre_technique_id', 'mitre_technique_name', 'mitre_technique_name']
+type: any
+
+alert_text: "
+    Event ID: {0}\n
+    Host: {1}\n
+    Username: {2}\n
+    Command Line: {3}\n
+    Current Directory: {4}\n
+    Timestamp: {5}\n
+    LOG ID: {7}\n
+    Index: {8}\n"
+alert_text_args: ["event_id", "host_name", "user_name", "process_command_line", "process_current_directory", "@timestamp", "num_hits", "_id", "_index"]
+alert_text_type: alert_text_only
+
+slack_msg_color: 'warning'
+
+alert:
+- slack
