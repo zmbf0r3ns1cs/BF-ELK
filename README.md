@@ -10,7 +10,7 @@ The contents of this repository include:
 - Generic Elastalert Rules
 
 ## Credit
-This work would not be possible without the work of others. While their work is credited where seen, below are contributors to the work within this repository:
+This work would not be possible without the work of others. While their work is credited where seen, below are list of contributors and their respective projects:
 
 ### Roberto Rodriguez
 #### HELK Project - Logstash and Winlogbeat Configuration/Pipeline Files
