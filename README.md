@@ -1,2 +1,2 @@
-# BF-ELK
-Burnham Forensics ELK Deployment Files
+![Screenshot](/images/bf+elk.PNG)
+### Burnham Forensics ELK Deployment Files
