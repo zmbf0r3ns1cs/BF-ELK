@@ -1,0 +1,30 @@
+name: Failed NGINX Logon Detected
+import: important_config.txt
+type: any
+index: filebeat-nginx-*
+
+filter:
+- query:
+   query_string:
+      query: '(fileset.name:("error")) AND (nginx.error.pid:("1164"))'
+
+realert:
+   minutes: 1
+
+alert_text: "
+            Host: {0}\n
+            Details: {1}\n
+            Source Log: {2}\n
+            Timestamp: {3}\n
+            Connection ID: {4}\n
+            Error PID: {5}\n
+            Log ID: {6}\n
+            Index: {7}\n"
+alert_text_args: ["host.name", "nginx.error.message", "source", "@timestamp", "nginx.error.connection_id", "nginx.error.pid", "_id", "_index"]
+alert_text_type: alert_text_only
+
+#slack_icon_url_override: 'https://image.freepik.com/free-icon/lock-in-a-circle_318-9883.jpg'
+#slack_msg_color: 'warning'
+
+alert:
+- slack
