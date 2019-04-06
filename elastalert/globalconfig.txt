@@ -1,0 +1,11 @@
+# Elastalert Global Configuration File
+# Zachary Burnham (@zmbf0r3ns1cs)
+# Point EA Rules to this custom file at "import" section (can be named whatever you want)
+
+#Port to use
+es_port: 9200
+es_host: <es01-IP>
+
+slack_webhook_url:
+#slack_icon_url_override: https://i.slack.imgur.com/coQRd.jpg 
+#slack_username_override: Odin

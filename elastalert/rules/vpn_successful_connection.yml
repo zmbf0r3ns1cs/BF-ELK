@@ -1,0 +1,29 @@
+name: Successful VPN Connection Established
+import: reg_config.txt
+type: any
+index: logs-endpoint-winevent-application-*
+
+filter:
+- query:
+   query_string:
+      query: '(event_id:("20225")) AND (source_name:("RasClient")) AND (log_name:("Application"))'
+
+realert:
+   minutes: 1
+
+alert_text: "
+                VPN Name: {0}\n
+                Host: {1}\n
+                Details: {2}\n
+                Timestamp: {3}\n
+                Event ID: {4}\n
+                Log ID: {5}\n
+                Index: {6}\n"
+alert_text_args: ["param3", "beat_hostname", "param4", "@timestamp", "event_id", "_id", "_index"]
+alert_text_type: alert_text_only
+
+#slack_icon_url_override: ''
+slack_msg_color: 'warning'
+
+alert:
+- slack
